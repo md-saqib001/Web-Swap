@@ -1,0 +1,28 @@
+{
+  "name": "internet-roulette",
+  "version": "1.0.0",
+  "description": "This is a simple app in which you give a link of an amazing website you like in return you get a link of the website.",
+  "homepage": "https://github.com/md-saqib001/internet-roulette#readme",
+  "bugs": {
+    "url": "https://github.com/md-saqib001/internet-roulette/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/md-saqib001/internet-roulette.git"
+  },
+  "license": "ISC",
+  "author": "Saqib",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
