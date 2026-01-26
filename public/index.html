@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internet Roulette 🎰</title>
-    
+    <title>WebSwap ⚡</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>🎰 Internet Roulette</h1>
-    <p>Risk a click. Discover the unknown.</p>
-    
-    <button id="spinBtn">SPIN THE WHEEL</button>
-    
-    <div id="result"></div>
+    <div class="container">
+        <header>
+            <h1>⚡ WebSwap</h1>
+            <p>Give a cool website. Get a cool website.</p>
+        </header>
+
+        <div class="card">
+            <h2>Discover</h2>
+            <p>Find a random gem from the community.</p>
+            <button id="getLinkBtn" class="action-btn">Get a Link</button>
+            <div id="result"></div>
+        </div>
+
+        <div class="card">
+            <h2>Contribute</h2>
+            <p>Add a URL to the pool.</p>
+            <div class="input-group">
+                <input type="url" id="newLinkInput" placeholder="https://supercoolsite.com" required>
+                <button id="addLinkBtn" class="secondary-btn">Add</button>
+            </div>
+            <div id="addResult"></div>
+        </div>
+    </div>
 
     <script src="script.js" defer></script>
 </body>
