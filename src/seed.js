@@ -1,38 +1,34 @@
-import db from './db.js';
+import { openDb } from './db.js';
+import { links } from '../data/data.js';
 
-const links = [
-    "https://theuselessweb.com/",
-    "https://hackertyper.com/",
-    "https://jacksonpollock.org/",
-    "https://paveldogreat.github.io/WebGL-Fluid-Simulation/",
-    "https://quickdraw.withgoogle.com/",
-    "https://neal.fun/deep-sea/",
-    "https://waifu2x.udp.jp/",
-    "https://stellarium-web.org/",
-    "https://musiclab.chromeexperiments.com/",
-    "https://coolors.co/",
-    "https://app.diagrams.net/",
-    "https://musclewiki.com/",
-    "https://radio.garden/",
-    "https://flightradar24.com/",
-    "https://apod.nasa.gov/",
-    "https://nothing-to-watch.port80.ch/",
-    "https://www.window-swap.com/",
-    "https://www.scribblemaps.com/"
-];
+async function seedDatabase() {
+    const db = await openDb();
 
-// Loop through the list and insert each one
-db.serialize(() => {
-    const stmt = db.prepare("INSERT INTO links (url) VALUES (?)");
+    try {
+        await db.exec('BEGIN TRANSACTION');
 
-    links.forEach(link => {
-        stmt.run(link);
-        console.log(`Added: ${link}`);
-    });
+        await db.exec('DELETE FROM links');
 
-    stmt.finalize();
-    console.log("Seeding complete!");
+        const insertSQL = `INSERT INTO links (url) VALUES (?)`;
+
+        for (const url of links) {
+            await db.run(insertSQL, [url]);
+        }
+
+        await db.exec('COMMIT');
+        console.log('Database seeded successfully.');
+    }
+    catch (error) {
+        await db.exec('ROLLBACK');
+        throw error;
+    }
+    finally {
+        await db.close();
+    }
+}
+
+
+seedDatabase().catch(err => {
+    console.error('Error seeding database:', err);
+    process.exit(1);
 });
-
-// Note: We don't close the DB here because db.js keeps it open, 
-// but the script will finish naturally.

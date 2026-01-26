@@ -1,0 +1,20 @@
+export const links = [
+    "https://theuselessweb.com/",
+    "https://hackertyper.com/",
+    "https://jacksonpollock.org/",
+    "https://paveldogreat.github.io/WebGL-Fluid-Simulation/",
+    "https://quickdraw.withgoogle.com/",
+    "https://neal.fun/deep-sea/",
+    "https://waifu2x.udp.jp/",
+    "https://stellarium-web.org/",
+    "https://musiclab.chromeexperiments.com/",
+    "https://coolors.co/",
+    "https://app.diagrams.net/",
+    "https://musclewiki.com/",
+    "https://radio.garden/",
+    "https://flightradar24.com/",
+    "https://apod.nasa.gov/",
+    "https://nothing-to-watch.port80.ch/",
+    "https://www.window-swap.com/",
+    "https://www.scribblemaps.com/"
+];

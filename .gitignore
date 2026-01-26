@@ -1,3 +1,6 @@
+#VSCode
+.vscode/
+
 # Logs
 logs
 *.log
@@ -137,3 +140,9 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+
+# Local Database
+*.db
+*.sqlite
+database/
