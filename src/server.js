@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import { openDb } from './db.js';
+import { openDb } from '#config/db.js';
 
 const app = express();
 const PORT=process.env.PORT || 3000;
@@ -21,7 +21,7 @@ app.get('/api/random', async (req, res) => {
         const link = await db.get('SELECT * FROM links ORDER BY RANDOM() LIMIT 1');
 
         if(!link) {
-            return res.status(404).json({ error: "No links found in the databse! "});
+            return res.status(404).json({ error: "No links found in the database! "});
         }
 
         res.json(link);

@@ -1,5 +1,5 @@
-import { openDb } from './db.js';
-import { links } from '../data/data.js';
+import { openDb } from '#config/db.js';
+import { links } from '../../data/data.js';
 
 async function seedDatabase() {
     const db = await openDb();

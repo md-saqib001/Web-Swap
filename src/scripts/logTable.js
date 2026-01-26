@@ -1,4 +1,4 @@
-import { openDb } from './db.js';
+import { openDb } from '#config/db.js';
 
 async function viewAllLinks() {
     const db = await openDb();
