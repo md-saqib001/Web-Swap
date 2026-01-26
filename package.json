@@ -1,5 +1,5 @@
 {
-  "name": "internet-roulette",
+  "name": "web-swap",
   "version": "1.0.0",
   "description": "This is a simple app in which you give a link of an amazing website you like in return you get a link of the website.",
   "homepage": "https://github.com/md-saqib001/internet-roulette#readme",
@@ -13,15 +13,24 @@
   "license": "ISC",
   "author": "Saqib",
   "type": "module",
-  "main": "server.js",
+  "imports": {
+    "#config/*": "./src/config/*",
+    "#data/*": "./data/*",
+    "#controllers/*": "./src/controllers/*",
+    "#routes/*": "./src/routes/*",
+    "#scripts/*": "./src/scripts/*"
+  },
+  "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "nodemon src/server.js",
+    "db:reset": "node src/scripts/createTable.js && node src/scripts/seed.js && node src/scripts/logTable.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "nodemon": "^3.1.11",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   }
