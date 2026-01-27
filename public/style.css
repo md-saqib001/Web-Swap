@@ -1,17 +1,29 @@
-/* Reset and Base Styles */
+/* public/style.css */
 * {
     box-sizing: border-box;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f172a; /* Dark Slate Blue */
+    /* Animated Dark Gradient */
+    background: linear-gradient(-45deg, #0f0c29, #00291b, #24243e, #1a1a2e, #00291b);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    
     color: #e2e8f0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    overflow-x: hidden;
+}
+
+/* Background Animation Keyframes */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
@@ -22,25 +34,32 @@ body {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin: 0;
-    background: linear-gradient(to right, #818cf8, #c084fc);
+    /* 3D Text Effect */
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+    background: linear-gradient(to right, #a78bfa, #c084fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 p {
     color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
 }
 
 /* Card Design */
 .card {
-    background-color: #1e293b;
-    padding: 25px;
-    margin-top: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-    border: 1px solid #334155;
+    background-color: rgba(30, 41, 59, 0.7); /* Semi-transparent */
+    backdrop-filter: blur(10px); /* Glassmorphism */
+    padding: 30px;
+    margin-top: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 h2 {
@@ -48,51 +67,81 @@ h2 {
     color: #f8fafc;
 }
 
-/* Buttons */
-.action-btn {
+/* --- THE 3D BUTTONS --- */
+.btn-3d {
     width: 100%;
     padding: 15px;
-    font-size: 1.2rem;
-    background-color: #6366f1; /* Indigo */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.action-btn:hover {
-    background-color: #4f46e5;
-}
-
-.secondary-btn {
-    padding: 12px 20px;
-    background-color: #10b981; /* Emerald Green */
-    color: white;
-    border: none;
-    border-radius: 0 8px 8px 0;
-    cursor: pointer;
+    font-size: 1.3rem;
     font-weight: bold;
+    color: white;
+    background-color: #6366f1; /* Indigo Front */
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.1s;
+    
+    /* The 3D Shadow/Side */
+    box-shadow: 0px 6px 0px #4338ca, /* Darker Indigo Bottom */
+                0px 6px 10px rgba(0,0,0,0.4); /* Drop Shadow */
+    position: relative;
+    top: 0;
 }
 
-.secondary-btn:hover {
-    background-color: #059669;
+.btn-3d:active {
+    /* Push down effect */
+    top: 6px;
+    box-shadow: 0px 0px 0px #4338ca, 
+                inset 0px 3px 5px rgba(0,0,0,0.2);
+}
+
+/* Secondary Button (Green) */
+.btn-green {
+    background-color: #10b981;
+    box-shadow: 0px 6px 0px #059669, 
+                0px 6px 10px rgba(0,0,0,0.4);
+}
+.btn-green:active {
+    box-shadow: 0px 0px 0px #059669;
+}
+
+/* Generated Link Button (Gold) - The "Mystery Box" Reward */
+.btn-gold {
+    background-color: #f59e0b;
+    box-shadow: 0px 6px 0px #d97706, 
+                0px 6px 10px rgba(0,0,0,0.4);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    text-decoration: none; /* For <a> tags pretending to be buttons */
+}
+.btn-gold:active {
+    top: 6px;
+    box-shadow: 0px 0px 0px #d97706;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 /* Inputs */
 .input-group {
     display: flex;
     margin-top: 15px;
+    gap: 10px; /* Space between input and button */
 }
 
 input {
     flex-grow: 1;
-    padding: 12px;
-    border-radius: 8px 0 0 8px;
-    border: 1px solid #334155;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #334155;
     background-color: #0f172a;
     color: white;
     outline: none;
+    font-size: 1rem;
+    transition: border-color 0.2s;
 }
 
 input:focus {
@@ -102,12 +151,5 @@ input:focus {
 /* Results */
 #result, #addResult {
     margin-top: 15px;
-    font-size: 1.1rem;
     min-height: 20px;
-}
-
-a {
-    color: #38bdf8;
-    text-decoration: none;
-    font-weight: bold;
 }

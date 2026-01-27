@@ -11,23 +11,21 @@
     <div class="container">
         <header>
             <h1>⚡ WebSwap</h1>
-            <p>Give a cool website. Get a cool website.</p>
+            <p>Give a link. Get a link.</p>
         </header>
 
         <div class="card">
             <h2>Discover</h2>
-            <p>Find a random gem from the community.</p>
-            <button id="getLinkBtn" class="action-btn">Get a Link</button>
+            <button id="getLinkBtn" class="btn-3d">🎲 Spin for a Site</button>
             <div id="result"></div>
         </div>
 
         <div class="card">
             <h2>Contribute</h2>
-            <p>Add a URL to the pool.</p>
-            <div class="input-group">
-                <input type="url" id="newLinkInput" placeholder="https://supercoolsite.com" required>
-                <button id="addLinkBtn" class="secondary-btn">Add</button>
-            </div>
+            <form id="addForm" class="input-group">
+                <input type="url" id="newLinkInput" placeholder="https://cool-site.com" required>
+                <button type="submit" id="addLinkBtn" class="btn-3d btn-green">Add</button>
+            </form>
             <div id="addResult"></div>
         </div>
     </div>
