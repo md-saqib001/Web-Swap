@@ -2,12 +2,12 @@
 import rateLimit from 'express-rate-limit';
 
 // Rule 1: "The Heavy Guard" for Adding Links
-// Allows only 5 requests every 10 minutes per IP address
+// Allows only 5 requests every 5 minutes per IP address
 export const addLinkLimiter = rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 minutes
+    windowMs: 5 * 60 * 1000, // 5 minutes
     max: 5, // Limit each IP to 5 requests per windowMs
     message: {
-        error: "Too many links added! Please wait 10 minutes before contributing again."
+        error: "Too many links added! Please wait 5 minutes before contributing again."
     },
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers

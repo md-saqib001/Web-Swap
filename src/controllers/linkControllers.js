@@ -1,4 +1,14 @@
 import { openDb } from '#config/db.js';
+import { z } from 'zod';
+
+// --- 1. Define the Validation Schema ---
+// This acts as a "Bouncer". It checks if the incoming data matches this shape.
+const linkSchema = z.object({
+    url: z.string()
+        .min(1, { message: "URL cannot be empty" })
+        .url({ message: "Invalid URL format. Must start with http:// or https://" })
+        .trim() // Removes whitespace from start/end
+});
 
 // Helper function to extract just the domain (e.g., "google.com" from "https://www.google.com/maps")
 const getDomain = (url) => {
@@ -7,6 +17,28 @@ const getDomain = (url) => {
         return hostname.replace(/^www\./, ''); // Remove 'www.' if present
     } catch (e) {
         return null;
+    }
+};
+
+const checkUrlExists = async (url) => {
+    try {
+        // We use method: 'HEAD' because we only want to check headers, not download the whole page
+        // Timeout is 5000ms (5 seconds) so we don't wait forever
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        const response = await fetch(url, { 
+            method: 'HEAD', 
+            signal: controller.signal 
+        });
+        
+        clearTimeout(timeoutId);
+        
+        // If status is 200-299, it's good. 
+        // We also accept 3xx redirects, but fetch usually follows them automatically.
+        return response.ok; 
+    } catch (error) {
+        return false; // Connection failed, timeout, or DNS error
     }
 };
 
@@ -30,15 +62,26 @@ export const getRandomLink = async (req, res) => {
 };
 
 export const addLink = async (req, res) => {
-    const { url } = req.body;
 
-    if (!url) {
-        return res.status(400).json({ error: "URL is required" });
+    const validation = linkSchema.safeParse(req.body);
+
+    // If validation fails, Zod gives us a detailed error report
+    if (!validation.success) {
+        // We take the first error message and send it to the user
+        const errorMessage = validation.error.errors[0].message;
+        return res.status(400).json({ error: errorMessage });
     }
 
+    const { url } = validation.data;
     const domain = getDomain(url);
+
     if (!domain) {
         return res.status(400).json({ error: "Invalid URL format" });
+    }
+
+    const isLive = await checkUrlExists(url);
+    if (!isLive) {
+        return res.status(400).json({ error: "This website is unreachable or does not exist." });
     }
 
     try {
