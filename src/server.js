@@ -4,13 +4,15 @@ import cors from 'cors';
 import path from 'path';
 import linkRoutes from '#routes/linkRoutes.js';
 import adminRoutes from '#routes/adminRoutes.js';
-import { adminAuth } from './middleware/auth.js';
+import { adminAuth } from '#middleware/auth.js';
 
 const app = express();
 const PORT=process.env.PORT || 3000;
 
 //Middleware to parse JSON bodies
 app.use(express.json());
+
+//Middleware for CORS
 app.use(cors());
 
 

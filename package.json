@@ -18,7 +18,8 @@
     "#data/*": "./data/*",
     "#controllers/*": "./src/controllers/*",
     "#routes/*": "./src/routes/*",
-    "#scripts/*": "./src/scripts/*"
+    "#scripts/*": "./src/scripts/*",
+    "#middleware/*": "./src/middleware/*"
   },
   "main": "src/server.js",
   "scripts": {
