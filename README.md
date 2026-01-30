@@ -120,12 +120,24 @@ Content-Type: application/json
 ```
 
 **Response** (200 OK):
+
+For new links:
 ```json
 {
   "message": "Link added successfully!",
   "id": 42,
   "url": "https://cool-site.com",
   "isDuplicate": false
+}
+```
+
+For duplicate domains:
+```json
+{
+  "message": "Link accepted! (Duplicate domain)",
+  "id": 1,
+  "url": "https://cool-site.com",
+  "isDuplicate": true
 }
 ```
 
@@ -261,7 +273,7 @@ This project is licensed under the ISC License.
 
 ## 🐛 Bug Reports
 
-Found a bug? Please open an issue at: https://github.com/md-saqib001/internet-roulette/issues
+Found a bug? Please open an issue at: https://github.com/md-saqib001/Web-Swap/issues
 
 ## 📚 Learn More
 
